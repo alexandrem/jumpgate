@@ -72,7 +72,7 @@ class OpenStackResponder(object):
             content_type = 'text/plain; charset=UTF-8'
         resp.content_type = content_type
         resp.stream_len = os_resp.headers.pop('Content-Length', 0)
-        resp.set_headers(os_resp.headers)
+        resp.set_headers(dict((k, v) for k, v in os_resp.headers.iteritems()))
         resp.stream = os_resp.raw
 
     on_get = _standard_responder
